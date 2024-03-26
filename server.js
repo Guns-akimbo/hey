@@ -25,7 +25,7 @@ mongoose.connect(DB)
 }).catch((error)=>{
     console.log(error.message)
 }) 
-app.listen(process.env.PORT||8000,()=>{ 
+app.listen(7000,()=>{ 
     console.log(`server is listening to port ${PORT}`)
 })
  
